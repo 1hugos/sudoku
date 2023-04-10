@@ -260,10 +260,8 @@ public class MainActivity extends AppCompatActivity {
         allInnerSquares.add(innerSquare32 = (GridLayout) findViewById(R.id.innerSquare32));
         allInnerSquares.add(innerSquare33 = (GridLayout) findViewById(R.id.innerSquare33));
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //ok
-        } else {
-            Toast.makeText(this, "Stary ten system", Toast.LENGTH_LONG).show();
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+            Toast.makeText(this, "System version is too old", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -271,23 +269,17 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean isBoardSolvedCorrectly() {
         boolean isSolvedCorrectly = true;
-        try {
-            int index = 0;
 
-
-            for (int i = 0; i < board.length; i++) {
-                for (int j = 0; j < board.length; j++) {
-                    String valueInTextView = allTextView.get(index).getText().toString();
-                    String valueInBoard = String.valueOf(board[i][j]);
-                    if (!valueInTextView.equals((valueInBoard))) {
-                        isSolvedCorrectly = false;
-                    }
-                    index++;
+        int index = 0;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                String valueInTextView = allTextView.get(index).getText().toString();
+                String valueInBoard = String.valueOf(board[i][j]);
+                if (!valueInTextView.equals((valueInBoard))) {
+                    isSolvedCorrectly = false;
                 }
+                index++;
             }
-
-
-        } catch (Exception ignored) {
         }
         return isSolvedCorrectly;
     }
@@ -350,8 +342,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
-
-
     private TextView selectedTextView;
 
     public void onTextViewClicked(View view) {
